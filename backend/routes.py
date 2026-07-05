@@ -27,3 +27,13 @@ def analyze():
         return jsonify({"error": str(exc)}), 400
     except Exception:
         return jsonify({"error": "Unable to analyze the waste item. Please try again."}), 500
+
+
+@api.route("/health")
+def health():
+    import os
+    return jsonify({
+        "status": "ok",
+        "service": "WasteGuide AI Backend",
+        "env_keys": list(os.environ.keys())
+    }), 200

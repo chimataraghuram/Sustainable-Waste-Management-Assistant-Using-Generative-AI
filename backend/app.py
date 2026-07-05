@@ -15,15 +15,6 @@ def create_app() -> Flask:
 
     app.register_blueprint(api, url_prefix="/api")
 
-    @app.route("/health")
-    def health():
-        import os
-        return {
-            "status": "ok",
-            "service": "WasteGuide AI Backend",
-            "env_keys": list(os.environ.keys())
-        }
-
     return app
 
 
