@@ -10,8 +10,8 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Allow frontend dev server to communicate with backend
-    CORS(app, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+    # Enable CORS for all origins so deployed frontend can access it
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
     app.register_blueprint(api, url_prefix="/api")
 
@@ -22,6 +22,7 @@ def create_app() -> Flask:
     return app
 
 
+app = create_app()
+
 if __name__ == "__main__":
-    app = create_app()
     app.run(host="0.0.0.0", port=5000, debug=Config.DEBUG)
