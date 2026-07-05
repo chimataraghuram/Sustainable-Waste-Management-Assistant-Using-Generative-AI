@@ -1,171 +1,217 @@
-# WasteGuide AI – Sustainable Waste Management Assistant Using Generative AI
+# 🌍 WasteGuide AI
+### Sustainable Waste Management Assistant Using Generative AI
 
-A full-stack web application that helps users identify how to properly dispose of everyday waste items using Generative AI (Google Gemini).
+WasteGuide AI is an AI-powered waste classification and sustainable disposal assistant that analyzes everyday waste items using Google Gemini (gemini-2.0-flash), generates step-by-step disposal guidance, evaluates recyclability, flags potential hazards, provides eco-friendly suggestions, and tracks analysis history in an interactive history page powered by Firebase Firestore.
 
-## Features
+---
 
-- **AI-Powered Analysis** — Enter any waste item and get structured disposal guidance
-- **Beautiful UI** — Modern glassmorphism design with Tailwind CSS
-- **History Tracking** — All analyses saved to Firebase Firestore
-- **Three Pages** — Home, Result, and History
+## 🚀 Live Demo
+Experience WasteGuide AI Live [Here](http://localhost:5173) *(Runs locally on default Vite setup)*
 
-## Tech Stack
+---
 
-| Layer    | Technology                          |
-|----------|-------------------------------------|
-| Frontend | React.js + Vite + Tailwind CSS      |
-| Backend  | Flask (Python)                      |
-| AI       | Google Gemini API (gemini-2.0-flash) |
-| Database | Firebase Firestore                  |
-| HTTP     | Axios                               |
+## 📝 Project Overview
+WasteGuide AI was developed to demonstrate end-to-end AI application development using modern Full Stack technologies and Generative AI.
 
-## Project Structure
+The application allows users to enter any household or industrial waste item (e.g., plastic bottle, LED bulb, banana peel). Using the Google Gemini API, WasteGuide AI evaluates the item's details, categorizes it, and outputs structured, clear, and actionable advice to encourage proper recycling and safe disposal.
+
+---
+
+## ✨ Key Features
+- 🔍 **AI-powered Waste Identification** — Simply type any waste item for analysis.
+- ♻️ **Recyclability & Category Classification** — Instant identification of waste category and recyclability.
+- 📋 **Step-by-Step Disposal Steps** — AI-generated preparation steps before disposal.
+- ⚠️ **Hazard Detection** — Real-time alerts for hazardous items (electronics, chemicals, batteries).
+- 🌱 **Eco Suggestions** — Custom tips to reduce future waste or use eco-friendly alternatives.
+- 🗂️ **Historical Inspection Log** — Saved records of past searches fetched from Firebase Firestore.
+- 📱 **Responsive Glassmorphism UI** — A modern, fully responsive user interface built using Tailwind CSS.
+
+---
+
+## 🖼️ Application Workflow
 
 ```
+       Enter Waste Item (e.g., LED Bulb)
+                      │
+                      ▼
+            Submit to Backend API
+                      │
+                      ▼
+         Gemini API Analysis (JSON Mode)
+                      │
+                      ▼
+     ┌────────────────┴────────────────┐
+     ▼                                 ▼
+Classification & Recyclability     Disposal & Prep Steps
+     │                                 │
+     └────────────────┬────────────────┘
+                      ▼
+       Hazard Warnings & Eco Suggestions
+                      │
+                      ▼
+        Save to Firebase History Log
+                      │
+                      ▼
+            Display Result Page
+```
+
+---
+
+## 🎯 Supported Waste Types
+- 🥤 **Plastics** (PET Bottles, Bags, Containers)
+- 🖥️ **E-Waste** (Smartphones, LED Bulbs, Chargers)
+- 🍌 **Organic** (Food Scraps, Leaves, Coffee Grounds)
+- 📰 **Paper & Cardboard** (Newspapers, Boxes)
+- 🧪 **Hazardous** (Batteries, Chemicals, Aerosols)
+- 🥛 **Glass & Metal** (Jars, Cans, Foil)
+
+---
+
+## 🏗️ Technology Stack
+
+| Category | Technologies |
+|---|---|
+| **Frontend** | React.js, Vite, Tailwind CSS, React Router |
+| **Backend** | Flask (Python), Flask-CORS, Dotenv |
+| **Database** | Firebase Cloud Firestore |
+| **AI Engine** | Google Gemini (gemini-2.0-flash) |
+| **HTTP client** | Axios, Fetch API |
+
+---
+
+## 📂 Project Structure
+
+```
+Sustainable-Waste-Management-Assistant-Using-Generative-AI/
 ├── backend/
-│   ├── app.py                 # Flask entry point
-│   ├── routes.py              # API routes
-│   ├── config.py              # Configuration
 │   ├── services/
-│   │   └── groq_service.py    # Groq AI integration
-│   ├── requirements.txt
-│   └── .env.example
+│   │   └── gemini_service.py   # Gemini AI prompt & generation
+│   ├── app.py                  # Flask entry point & factory
+│   ├── routes.py               # API endpoints (/api/analyze)
+│   ├── config.py               # Config & environment loaders
+│   ├── requirements.txt        # Backend dependencies
+│   └── .env.example            # Backend env template
 │
-└── frontend/
-    ├── src/
-    │   ├── components/        # Reusable UI components
-    │   ├── pages/             # Home, Result, History
-    │   ├── services/          # API & history services
-    │   └── firebase/          # Firebase config
-    ├── package.json
-    └── .env.example
+├── frontend/
+│   ├── src/
+│   │   ├── components/         # SearchCard, InfoCard, Navbar, Layout
+│   │   ├── pages/              # Home, Result, History
+│   │   ├── services/           # Axios API caller & Firestore service
+│   │   ├── firebase/           # Firebase app initialisation
+│   │   ├── App.jsx             # React routing setup
+│   │   ├── index.css           # Styling directives
+│   │   └── main.jsx            # Entry point
+│   ├── package.json            # Frontend script dependencies
+│   └── .env.example            # Frontend env template
+│
+├── README.md
+└── .gitignore                  # Git exclusions for node_modules, .env, etc.
 ```
 
-## Prerequisites
+---
 
-- **Node.js** 18+ and npm
-- **Python** 3.10+
-- **Gemini API Key** — [Google AI Studio](https://aistudio.google.com/)
-- **Firebase Project** — [console.firebase.google.com](https://console.firebase.google.com)
+## ⚙️ Installation & Setup
 
-## Setup
+### 1. Clone the Repository
+```bash
+git clone https://github.com/chimataraghuram/Sustainable-Waste-Management-Assistant-Using-Generative-AI.git
+cd Sustainable-Waste-Management-Assistant-Using-Generative-AI
+```
 
-### 1. Backend
-
+### 2. Backend Setup
+Navigate to the backend directory, set up your virtual environment, and install dependencies:
 ```bash
 cd backend
+
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment (Windows)
+.\venv\Scripts\activate
+# Activate virtual environment (macOS/Linux)
+source venv/bin/activate
+
+# Install requirements
 pip install -r requirements.txt
 ```
-
-Copy the environment template and add your Gemini API key:
-
+Copy `.env.example` to `.env` and fill in your Gemini API key:
 ```bash
 cp .env.example .env
-# Edit .env and set GEMINI_API_KEY=your_key_here
+# Set GEMINI_API_KEY=your_gemini_api_key
 ```
-
-Start the Flask server:
-
+Start the Flask development server:
 ```bash
 python app.py
 ```
+The backend API runs at `http://localhost:5000`.
 
-The API runs at `http://localhost:5000`.
-
-### 2. Frontend
-
+### 3. Frontend Setup
+Navigate to the frontend directory, install dependencies, and run:
 ```bash
-cd frontend
+cd ../frontend
+
+# Install node packages
 npm install
 ```
-
-Copy the environment template and add your Firebase config:
-
+Copy `.env.example` to `.env` and fill in your Firebase configuration parameters:
 ```bash
 cp .env.example .env
-# Edit .env with your Firebase project credentials
 ```
-
-Start the dev server:
-
+Start the Vite development server:
 ```bash
 npm run dev
 ```
+The frontend application runs at `http://localhost:5173`.
 
-The app runs at `http://localhost:5173`.
+---
 
-### 3. Firebase Setup
+## 🔥 Firebase Firestore Setup
+1. Create a project at [Firebase Console](https://console.firebase.google.com/).
+2. Enable **Cloud Firestore** in test mode or production mode.
+3. Obtain your configuration details from Project Settings and paste them into `frontend/.env`.
+4. The history logs will automatically write to a Firestore collection named `history`.
 
-1. Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
-2. Enable **Cloud Firestore** (start in test mode for local development)
-3. Go to Project Settings → General → Your apps → Web app
-4. Copy the config values into `frontend/.env`
-5. Create a Firestore collection named `history` (it will be populated automatically)
+---
 
-**Firestore Security Rules (development):**
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /history/{document=**} {
-      allow read, write: if true;
-    }
-  }
-}
-```
-
-> For production, restrict read/write with proper authentication rules.
-
-## API Reference
+## 📊 API Documentation
 
 ### `POST /api/analyze`
+Analyzes a waste item and returns structured disposal guidance.
 
-Analyze a waste item.
-
-**Request:**
-```json
-{ "item": "Plastic Bottle" }
-```
-
-**Response:**
+* **Request Body:**
 ```json
 {
-  "item": "Plastic Bottle",
-  "category": "Plastic Waste",
-  "recyclable": "Yes",
-  "disposal_steps": ["Empty bottle", "Remove cap", "Wash bottle", "Put into recycling bin"],
-  "hazard_warning": "No significant hazards.",
-  "eco_suggestion": "Switch to reusable water bottles."
+  "item": "LED Bulb"
 }
 ```
 
-### `GET /health`
+* **Response Body (200 OK):**
+```json
+{
+  "item": "LED Bulb",
+  "category": "E-Waste / Hazardous",
+  "recyclable": "Yes (special facility only)",
+  "disposal_steps": [
+    "Do not throw in regular trash bins",
+    "Store in a safe cardboard box to prevent breaking",
+    "Locate a local electronic recycling center",
+    "Drop off at a hazardous waste collection day"
+  ],
+  "hazard_warning": "Contains tiny amounts of heavy metals and glass particles that can cause injury if broken.",
+  "eco_suggestion": "Look into purchasing energy-efficient LED bulbs with longer lifespan ratings, or brands participating in take-back schemes."
+}
+```
 
-Health check endpoint.
+---
 
-## Environment Variables
+## 👨‍💻 Developer
+**CHIMATA RAGHURAM**
 
-### Backend (`backend/.env`)
+- [GitHub](https://github.com/chimataraghuram)
 
-| Variable         | Description          |
-|------------------|----------------------|
-| `GEMINI_API_KEY` | Your Gemini API key  |
-| `GEMINI_MODEL`   | Gemini model to use  |
-| `FLASK_DEBUG`    | `True` or `False`    |
+Developed as a Sustainable Waste Management Assistant technical showcase using React, Flask, Firebase Firestore, and the Google Gemini API.
 
-### Frontend (`frontend/.env`)
+---
 
-| Variable                          | Description              |
-|-----------------------------------|--------------------------|
-| `VITE_FIREBASE_API_KEY`           | Firebase API key         |
-| `VITE_FIREBASE_AUTH_DOMAIN`       | Firebase auth domain     |
-| `VITE_FIREBASE_PROJECT_ID`        | Firebase project ID      |
-| `VITE_FIREBASE_STORAGE_BUCKET`    | Firebase storage bucket  |
-| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase sender ID     |
-| `VITE_FIREBASE_APP_ID`            | Firebase app ID          |
-| `VITE_API_BASE_URL`               | Backend URL (optional)   |
-
-## License
-
-MIT
+## 📄 License
+This project is released under the [MIT License](LICENSE).
