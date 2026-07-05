@@ -25,5 +25,7 @@ def analyze():
         return jsonify({"item": item, **result}), 200
     except ValueError as exc:
         return jsonify({"error": str(exc)}), 400
-    except Exception:
-        return jsonify({"error": "Unable to analyze the waste item. Please try again."}), 500
+    except Exception as exc:
+        import traceback
+        print(traceback.format_exc())
+        return jsonify({"error": f"Internal Error: {str(exc)}", "details": traceback.format_exc()}), 500
