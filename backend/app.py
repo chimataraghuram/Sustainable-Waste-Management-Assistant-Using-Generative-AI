@@ -17,7 +17,12 @@ def create_app() -> Flask:
 
     @app.route("/health")
     def health():
-        return {"status": "ok", "service": "WasteGuide AI Backend"}
+        import os
+        return {
+            "status": "ok",
+            "service": "WasteGuide AI Backend",
+            "env_keys": list(os.environ.keys())
+        }
 
     return app
 
