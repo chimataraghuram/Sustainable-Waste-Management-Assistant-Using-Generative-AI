@@ -6,7 +6,7 @@ WasteGuide AI is an AI-powered waste classification and sustainable disposal ass
 ---
 
 ## 🚀 Live Demo
-Experience WasteGuide AI Live [Here](http://localhost:5173) *(Runs locally on default Vite setup)*
+Experience WasteGuide AI Live [Here](https://sustainable-waste-management-assistant-using-generative-al.vercel.app/)
 
 ---
 
